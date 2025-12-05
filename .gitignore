@@ -41,5 +41,5 @@
 *.dwo
 
 # adventofcode
-input.txt
-test.txt
+*.txt
+.clangd
