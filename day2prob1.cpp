@@ -1,11 +1,12 @@
+#include <cstdint>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
 
 struct Range {
-    long long start;
-    long long end;
+    std::string start;
+    std::string end;
 };
 
 int main() {
@@ -26,14 +27,28 @@ int main() {
     std::string start;
     std::string end;
 
+    uint64_t password = 0;
+
     while (std::getline(buffer, token, ',')) {
         size_t pos = token.find('-');
-        ranges.push_back({std::stoi(token.substr(0, pos)),
-                          std::stoi(token.substr(pos + 1))});
+        if (pos != std::string::npos) {
+            ranges.push_back({token.substr(0, pos), token.substr(pos + 1)});
+        }
     }
 
     for (Range r : ranges) {
-        std::cout << "Start: " << r.start << ", End: " << r.end << "\n";
+        for (uint64_t i = std::stoull(r.start); i <= std::stoull(r.end); i++) {
+            std::string num = std::to_string(i);
+            std::string doubled = num + num;
+
+            size_t repeated_len = doubled.find(num, 1);
+
+            if (repeated_len < num.length()) {
+                password += i;
+            }
+        }
+
+        std::cout << password << std::endl;
     }
 
     return 0;

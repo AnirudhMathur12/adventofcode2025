@@ -43,3 +43,6 @@
 # adventofcode
 *.txt
 .clangd
+
+# MacOS
+.DS_Store
