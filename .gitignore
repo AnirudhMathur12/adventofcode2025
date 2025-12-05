@@ -46,4 +46,5 @@
 
 # MacOS
 .DS_Store
-.xml
+*.xml
+*.iml
